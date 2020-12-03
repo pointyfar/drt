@@ -1,0 +1,85 @@
+<div class="w-full " >
+
+{{$home := site.Home }}
+
+<div class="">
+
+    {{ template "content-structure" (dict "currentLevel" $home "currentPage" . "level" 0 "maxlev" 3 ) }}
+
+</div>
+<hr>
+
+{{ define "content-structure" }}
+  {{ $level := .level }}
+  {{ $maxlev := .maxlev }}
+  {{ $currentLevel := .currentLevel }}
+  {{ $currentPage := .currentPage }}
+  
+  {{ if le $level $maxlev }}
+    {{ if $currentLevel.IsNode }}
+        {{ $children := $currentLevel.Pages }}
+        {{ $style := "" }}
+        {{ if not $currentLevel.IsHome }} 
+            {{ $style = (partial "level-styler" $level) }}
+        {{ end }}
+        <div class="{{cond $currentLevel.IsHome "text-lg" $style }}">
+        {{ $isred := eq $currentPage.Permalink $currentLevel.Permalink }}
+        {{ $isred = or $isred (in $currentLevel.RegularPagesRecursive $currentPage) }}
+        <a href="{{$currentLevel.Permalink}}" >
+            {{$currentLevel.Title}}
+        </a>
+        </div>
+        <ul>
+        {{ if (not (eq $currentLevel (site.GetPage "news")) )}}
+        {{ range $children }}
+            {{ $newlev := add 1 $level }}
+            {{ if and .IsNode (lt $newlev $maxlev) }} 
+            <li class="{{ partial "level-styler" $newlev }}">
+            {{template "content-structure" (dict "currentLevel" . "currentPage" $currentPage "level" $newlev "maxlev" $maxlev) }}
+            </li>
+            {{ else }}
+            <li class="{{ partial "level-styler" $newlev }}">
+                <div >
+                    <a href="#" class="{{ cond (eq . $currentPage)  "border-grey-400" "border-transparent"}}">
+                    {{.Title}}
+                </a>
+                </div>
+            </li>
+
+            {{ end }}
+            {{ end }}
+            {{ end }}
+    {{ end }}
+    </ul>
+  
+  {{ end }}
+
+<!-- End template -->
+{{ end }}
+
+{{ define "partials/level-styler" }}
+
+{{ $res := "" }}
+
+{{ if ge . 1 }}
+{{ $res = "font-semibold mb-4 mt-8" }}
+{{ end }}
+
+{{ if ge . 2 }}
+{{ $res = "font-semibold text-base mb-4" }}
+{{ end }}
+
+{{ if ge . 3 }}
+{{ $res = " font-normal text-base ml-4" }}
+{{ end }}
+
+{{ if ge . 4 }}
+{{ $res = " font-normal text-sm ml-4" }}
+{{ end }}
+
+{{ return $res }}
+{{ end }}
+
+
+             
+          </div>

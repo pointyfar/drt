@@ -1,0 +1,36 @@
+{{ define "main" }}
+
+<div class="container mb-12 mx-auto ">
+  
+    <div class="md:flex content-center flex-wrap -mx-2 p-3 bg-grey ">
+      
+      
+      <div class="w-full p-2">
+        <div class="md:flex-1 p-8 shadow-lg bg-white mb-4 border">
+          <h3 class="text-3xl font-semibold text-gray-800"><a class="hover:text-gray-600" href="{{.Permalink}}">{{.Title}}</a></h3>
+          {{ with .Description }}
+          <p class="mt-4 text-lg leading-relaxed text-gray-600">{{.}}</p>
+          {{ end }}
+          <ul class="list-none mt-4">
+          {{ range $i, $e := .Pages }}
+            <li class="py-2">
+              <div class="flex items-center">
+                <div>
+                  <h4 class="text-lg text-gray-600"><a class="hover:text-gray-400" href="{{$e.Permalink}}">{{$e.Title}}</a></h4>
+                  {{ with $e.Description }}
+                    <p class="mt-4 text-lg leading-relaxed text-gray-600">{{.}}</p>
+                    {{ end }}
+                </div>
+              </div>
+            </li>
+          {{ end }}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+
+{{ end }}
