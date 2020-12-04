@@ -5,103 +5,19 @@
     
     
     {{ $start := site.GetPage "start"}}
-    <div class="md:flex md:w-1/2 lg:w-1/2 p-2">
-      <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-pink-400 border-grey-dark">
-        <h3 class="text-3xl font-semibold text-gray-800"><a class="hover:text-gray-600" href="{{$start.Permalink}}">{{$start.Title}}</a></h3>
-        {{ with $start.Description }}
-        <p class="mt-4 text-lg leading-relaxed text-gray-600">{{.}}</p>
-        {{ end }}
-        <ul class="list-none mt-4">
-        {{ range $i, $e := $start.Pages }}
-          <li class="py-2">
-            <div class="flex items-center">
-              <div>
-                <h4 class="text-lg text-gray-600">{{$e.Title}}</h4>
-              </div>
-            </div>
-          </li>
-        {{ end }}
-        </ul>
-      </div>
-    </div>
+    {{ partial "components/homebox" (dict "page" $start "color" "pink-400" "size" "1/2") }}
 
     {{ $tutorials := site.GetPage "tutorials" }}
-
-    <div class="md:flex md:w-1/2 lg:w-1/2 p-2">
-      <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-blue-400 border-grey-dark">
-        <h3 class="text-3xl font-semibold text-gray-800"><a class="hover:text-gray-600" href="{{$tutorials.Permalink}}">{{$tutorials.Title}}</a></h3>
-        {{ with $tutorials.Description }}
-        <p class="mt-4 text-lg leading-relaxed text-gray-600">{{.}}</p>
-        {{ end }}
-        <ul class="list-none mt-4">
-        {{ range $i, $e := $tutorials.Pages }}
-          <li class="py-2">
-            <div class="flex items-center">
-              <div>
-                <h4 class="text-lg text-gray-600">{{$e.Title}}</h4>
-              </div>
-            </div>
-          </li>
-        {{ end }}
-        </ul>
-      </div>
-    </div>
+    {{ partial "components/homebox" (dict "page" $tutorials "color" "blue-400" "size" "1/2") }}
 
 
     {{ $howto := site.GetPage "howto" }}
+    {{ partial "components/homebox" (dict "page" $howto "color" "green-400" ) }}
 
-    <div class="md:flex w-full p-2">
-      <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-green-400 border-grey-dark">
-        <h3 class="text-3xl font-semibold text-gray-800 mb-8"><a class="hover:text-gray-600" href="{{$howto.Permalink}}">{{$howto.Title}}</a></h3>
-
-        <div class="md:flex flex-wrap  ">
-
-          {{ range $i, $e := $howto.Pages }}
-          
-        <div class="md:flex md:w-1/2 lg:w-1/2 p-2">
-            <div class="md:flex-1 p-8  border  bg-white border-grey-dark">
-              <h4 class="text-lg text-gray-600 font-semibold pb-4">{{$e.Title}}</h4>
-              <div>
-                {{ range $e.Pages }}
-                  <h4 class="text-lg text-gray-600 py-2">{{.Title}}</h4>
-                {{ end }}
-              </div>
-            </div>
-        </div>
-        {{ end }}
-      </div>
-      </div>
-    </div>
-    <!-- End How To -->
-
-    
-
+   
     {{ $references := site.GetPage "reference" }}
-    <div class="md:flex w-full p-2">
-      <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-yellow-400 border-grey-dark">
-        <h3 class="text-3xl font-semibold text-gray-800 mb-8"><a class="hover:text-gray-600" href="{{$references.Permalink}}">{{$references.Title}}</a></h3>
-
-        <div class="md:flex flex-wrap  ">
-
-          {{ range $i, $e := $references.Pages }}
-          
-        <div class="md:flex md:w-1/2 lg:w-1/2 p-2">
-            <div class="md:flex-1 p-8  border  bg-white border-grey-dark">
-              <h4 class="text-lg text-gray-600 font-semibold">{{$e.Title}}</h4>
-
-            </div>
-        </div>
-        {{ end }}
-      </div>
-      </div>
-    </div>
-
-
-  
-  
-  
-  
-  
+    {{ partial "components/homebox" (dict "page" $references "color" "yellow-400" "showchildren" false) }}
+ 
   
   </div>
     
