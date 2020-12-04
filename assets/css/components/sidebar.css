@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .sidebar > ol {
+        @apply text-base list-none px-0 py-2 m-0 hover:bg-transparent
+    }
+
+    .sidebar > ol > li {
+        @apply border-0 mt-8 mb-4 uppercase py-2 hover:bg-transparent
+    }
+
+    .sidebar > ol > li > ol {
+        @apply border-l-4 p-0 pl-4 pr-2 m-0 normal-case hover:bg-transparent
+      }
+  
+    .sidebar > ol > li > ol > li {
+        @apply border-0 pl-4 m-0 -ml-4 py-2 font-semibold hover:bg-transparent 
+    }
+    .sidebar > ol > li > ol > li > div {
+        @apply pl-4 m-0 -ml-4 pr-2 hover:bg-gray-100 py-2 
+    }
+    .sidebar > ol > li > ol > li > ol {
+        @apply p-0 border-0 m-0  font-normal hover:bg-transparent
+    }
+
+    .sidebar > ol > li > ol > li > ol > li {
+        @apply pl-4 m-0 -ml-4 py-1 pr-2 hover:bg-gray-100
+    }
+
+    .sidebar > ol > li > ol > li > ol > li > div {
+        @apply pl-4 m-0 -ml-4 py-1 pr-2 hover:bg-gray-100
+    }
+
+    .sidebar .current {
+        @apply bg-white
+
+    }    
+
+  }
+
+  

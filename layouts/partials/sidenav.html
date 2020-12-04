@@ -2,68 +2,69 @@
 
 {{$home := site.Home }}
 
-<div class="">
-
-    {{ template "content-structure" (dict "currentLevel" $home "currentPage" . "level" 0 "maxlev" 3 ) }}
-
+<div class="sidebar">
+    {{ template "structure" (dict "currentLevel" $home "currentPage" . "level" 0 "maxlev" 3 "theme" "gray" ) }}
 </div>
 
-{{ define "content-structure" }}
-  {{ $level := .level }}
-  {{ $maxlev := .maxlev }}
-  {{ $currentLevel := .currentLevel }}
-  {{ $currentPage := .currentPage }}
-  
-  {{ if le $level $maxlev }}
-    {{ if $currentLevel.IsNode }}
+
+{{ define "structure" }}
+    {{ $level := .level }}
+    {{ $maxlev := .maxlev }}
+    {{ $currentLevel := .currentLevel }}
+    {{ $currentPage := .currentPage }}
+    {{ $newlev := add $level 1 }}
+
+    {{ $theme := .theme | default "gray" }}
+
+    {{ if le $level $maxlev }}
+    
+    {{ if $currentLevel.IsHome }}
+    <a href="{{$currentLevel.Permalink}}" >{{ $currentLevel.Title }} </a>
+    <ol> 
         {{ $children := $currentLevel.Pages }}
-        {{ $style := "" }}
-        {{ if not $currentLevel.IsHome }} 
-            {{ $style = (partial "level-styler" $level) }}
-        {{ end }}
-        <div class="{{cond $currentLevel.IsHome "text-lg" $style }}">
-        {{ $isred := eq $currentPage.Permalink $currentLevel.Permalink }}
-        {{ $isred = or $isred (in $currentLevel.RegularPagesRecursive $currentPage) }}
-        <a href="{{$currentLevel.Permalink}}" >
-            {{$currentLevel.Title}}
-        </a>
-        </div>
-        <ul>
-        {{ if (not (eq $currentLevel (site.GetPage "news")) )}}
         {{ range $children }}
-            {{ $newlev := add 1 $level }}
-            {{ if and .IsNode (lt $newlev $maxlev) }} 
-            <li class="{{ partial "level-styler" $newlev }}">
-            {{template "content-structure" (dict "currentLevel" . "currentPage" $currentPage "level" $newlev "maxlev" $maxlev) }}
-            </li>
-            {{ else }}
-            <li class="{{ partial "level-styler" $newlev }}">
-                <div >
-                    <a href="#" class="{{ cond (eq . $currentPage)  "border-grey-400" "border-transparent"}}">
-                    {{.Title}}
-                </a>
-                </div>
-            </li>
+                {{ with .Params.theme }}{{ $theme = . }}{{ end }}
+                {{template "structure" (dict "currentLevel" . "currentPage" $currentPage "level" $newlev "maxlev" $maxlev "theme" $theme) }}
+        {{ end }}
+    </ol>
+    {{ else if $currentLevel.IsNode }}
+    <li class="{{cond (eq $currentLevel $currentPage) "current" "" }}">
+        <div >
+        <a href="{{$currentLevel.Permalink}}" >{{ $currentLevel.Title }} {{cond (eq $currentLevel $currentPage) "current" "" }}</a>
+        </div>
+    
+    
+        {{ if le $newlev $maxlev }}
+        <ol class="border-{{$theme}}-400"> 
+        {{ $children := $currentLevel.Pages }}
+        {{ range $children }}
+                {{template "structure" (dict "currentLevel" . "currentPage" $currentPage "level" $newlev "maxlev" $maxlev "theme" $theme) }}
+        {{ end }}
+        </ol>
+        {{ end }}
 
-            {{ end }}
-            {{ end }}
-            {{ end }}
+    </li>
+    
+    {{ else }}
+        <li class="{{cond (eq $currentLevel $currentPage) "current" "" }}">
+            <div>
+            <a href="{{$currentLevel.Permalink}}" >{{ $currentLevel.Title }}</a>
+            </div>
+        </li>
     {{ end }}
-    </ul>
-  
-  {{ end }}
 
-<!-- End template -->
+
+    {{ end }}
 {{ end }}
 
 {{ define "partials/level-styler" }}
 
 {{ $res := "" }}
 
-{{ if ge . 1 }}{{ $res = "font-semibold mb-4 mt-8" }}{{ end }}
-{{ if ge . 2 }}{{ $res = "font-semibold text-base mb-4" }}{{ end }}
-{{ if ge . 3 }}{{ $res = " font-normal text-base ml-4" }}{{ end }}
-{{ if ge . 4 }}{{ $res = " font-normal text-sm ml-4" }}{{ end }}
+{{ if eq . 1 }}{{ $res = "font-semibold text-base uppercase mb-4 mt- border border-blue-400 px-2" }}{{ end }}
+{{ if eq . 2 }}{{ $res = "font-semibold text-base normal-case mb-4 mt-8" }}{{ end }}
+{{ if eq . 3 }}{{ $res = "font-normal text-base " }}{{ end }}
+{{ if eq . 4 }}{{ $res = "font-normal text-sm " }}{{ end }}
 
 {{ return $res }}
 
