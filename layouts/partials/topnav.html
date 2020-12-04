@@ -1,10 +1,11 @@
-{{ $scolor := "border-gray-200" }}
-{{ if eq .Section "start" }}{{ $scolor = "border-pink-400"}}{{ end }}
-{{ if eq .Section "tutorials" }}{{ $scolor = "border-blue-400"}}{{ end }}
-{{ if eq .Section "howto" }}{{ $scolor = "border-green-400"}}{{ end }}
-{{ if eq .Section "reference" }}{{ $scolor = "border-yellow-400"}}{{ end }}
+{{ $scolor := "gray" }}
+{{ with (site.GetPage .Section) }} 
+{{ with .Params.theme }}
+{{ $scolor = . }}
+{{ end }}
+{{ end }}
 
-<nav id="header" class="fixed w-full z-10 top-0 bg-white border-b-8 shadow-md {{$scolor}}">
+<nav id="header" class="fixed w-full z-10 top-0 bg-white border-b-8 shadow-md border-{{$scolor}}-400">
     <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 ">
        <div class="pl-4 flex items-center  mr-12">
           <a class="text-gray-900 text-base no-underline hover:no-underline font-extrabold text-xl"  href="/"> 
@@ -12,39 +13,31 @@
           </a>
        </div>
 
-       <div class="block lg:hidden pr-4 ">
-          <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-500 border-gray-600 hover:text-gray-900 hover:border-purple-500 appearance-none focus:outline-none">
-             <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                <title>Menu</title>
-                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-             </svg>
-          </button>
-       </div>
+
        <div class="w-full flex-grow lg:flex  lg:content-center lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 z-20" id="nav-content">
+         <ul class="list-reset w-full lg:flex justify-start">
+            {{ range site.Menus.main }}
+            <li class="mr-3 py-2 lg:py-0">
+               <a class="inline-block uppercase font-semibold text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-2" href="#"> {{.Name}} </a>
+            </li>
+            {{ end }}
+         </ul>
+       </div>
+
+       <div class="w-full flex-grow lg:flex  lg:content-center lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 z-20" id="nav-content">
+
          <ul class="list-reset w-full lg:flex justify-end">
+            {{ range site.Menus.docs }}
             <li class="mr-3 py-2 lg:py-0">
-               <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-4" href="#">Getting Started</a>
+               <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-2" href="#"> {{.Name}} </a>
             </li>
-            <li class="mr-3 py-2 lg:py-0">
-               <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-4" href="#">Tutorials</a>
-            </li>
-            <li class="mr-3 py-2 lg:py-0">
-               <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-4" href="#">How Tos</a>
-            </li>
-            <li class="mr-3 py-2 lg:py-0">
-               <a class="inline-block text-gray-600 no-underline hover:text-gray-900 hover:underline py-2 px-4" href="#">References</a>
-            </li>
+            {{ end }}
          </ul>
          
       </div>
             <div class="flex-1 w-full mx-auto max-w-sm content-center py-4 lg:py-0 justify-end">
                <div class="relative pull-right pl-4 pr-4 md:pr-0">
-                  <input type="search" placeholder="Search" class="w-full bg-gray-100 text-sm text-gray-800 transition border focus:outline-none focus:border-purple-500 rounded py-1 px-2 pl-10 appearance-none leading-normal">
-                  <div class="absolute search-icon" style="top: 0.375rem;left: 1.75rem;">
-                     <svg class="fill-current pointer-events-none text-gray-800 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z"></path>
-                     </svg>
-                  </div>
+                  <input type="search" placeholder="Search" class="w-full bg-gray-100 text-sm text-gray-800 transition border focus:outline-none focus:border-blue-400 rounded py-1 px-2 appearance-none leading-normal">
                </div>
             </div>
     </div>
