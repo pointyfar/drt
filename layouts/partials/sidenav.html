@@ -7,7 +7,6 @@
     {{ template "content-structure" (dict "currentLevel" $home "currentPage" . "level" 0 "maxlev" 3 ) }}
 
 </div>
-<hr>
 
 {{ define "content-structure" }}
   {{ $level := .level }}
@@ -61,23 +60,13 @@
 
 {{ $res := "" }}
 
-{{ if ge . 1 }}
-{{ $res = "font-semibold mb-4 mt-8" }}
-{{ end }}
-
-{{ if ge . 2 }}
-{{ $res = "font-semibold text-base mb-4" }}
-{{ end }}
-
-{{ if ge . 3 }}
-{{ $res = " font-normal text-base ml-4" }}
-{{ end }}
-
-{{ if ge . 4 }}
-{{ $res = " font-normal text-sm ml-4" }}
-{{ end }}
+{{ if ge . 1 }}{{ $res = "font-semibold mb-4 mt-8" }}{{ end }}
+{{ if ge . 2 }}{{ $res = "font-semibold text-base mb-4" }}{{ end }}
+{{ if ge . 3 }}{{ $res = " font-normal text-base ml-4" }}{{ end }}
+{{ if ge . 4 }}{{ $res = " font-normal text-sm ml-4" }}{{ end }}
 
 {{ return $res }}
+
 {{ end }}
 
 
