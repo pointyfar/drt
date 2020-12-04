@@ -1,7 +1,9 @@
 {{ $page := .page }}
-{{ $color := .color | default "gray-400" }}
+{{ $color := "gray-400" }}
 {{ $size := .size | default "full"}}
 {{ $show := .showchildren | default true }}
+
+{{ with $page.Params.theme }}{{ $color = . }}{{ end }}
 
 <div class="md:flex md:w-1/2 lg:w-{{$size}} p-2">
     <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-{{$color}}">
@@ -12,7 +14,7 @@
             </a>
         </h2>
         {{ with $page.Description }}
-        <p class="mt-4 text-lg leading-relaxed text-gray-600">{{.}}</p>
+        <p class="mt-4 mb-8 text-lg leading-relaxed text-gray-600">{{.}}</p>
         {{ end }}
 
         {{ if eq $size "1/2" }}
@@ -21,7 +23,7 @@
             <li class="py-2">
                 <div class="flex items-center">
                     <div>
-                        <h3 class="text-lg text-gray-600"><a  class="hover:text-gray-500" href="{{.RelPermalink}}">{{$e.Title}}</a></h3>
+                        <h3 class="text-lg text-gray-700"><a  class="hover:text-gray-500" href="{{.RelPermalink}}">{{$e.Title}}</a></h3>
                     </div>
                 </div>
             </li>
@@ -33,11 +35,11 @@
             {{ range $i, $e := $page.Pages }}
             <div class="md:flex md:w-1/2 lg:w-1/2 p-2 mt-4">
                 <div class="md:flex-1 p-8  border  bg-white border-grey-dark">
-                    <h3 class="text-lg text-gray-600 font-semibold"><a class="hover:text-gray-500" href="{{.RelPermalink}}">{{$e.Title}}</a></h3>
+                    <h3 class="text-lg text-gray-700 font-semibold"><a class="hover:text-gray-500" href="{{.RelPermalink}}">{{$e.Title}}</a></h3>
                     {{ if $show }}
                     <div class="pt-4">
                     {{ range $e.Pages }}
-                        <h4 class="text-lg text-gray-600 py-2"><a class="hover:text-gray-500" href="{{.RelPermalink}}">{{.Title}}</a></h4>
+                        <h4 class="text-lg text-gray-700 py-2"><a class="hover:text-gray-500" href="{{.RelPermalink}}">{{.Title}}</a></h4>
                     {{ end }}
                     </div>
                     {{ end }}

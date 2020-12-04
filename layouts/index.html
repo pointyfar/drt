@@ -5,18 +5,18 @@
     
     
     {{ $start := site.GetPage "start"}}
-    {{ partial "components/homebox" (dict "page" $start "color" "pink-400" "size" "1/2") }}
+    {{ partial "components/homebox" (dict "page" $start "size" "1/2") }}
 
     {{ $tutorials := site.GetPage "tutorials" }}
-    {{ partial "components/homebox" (dict "page" $tutorials "color" "blue-400" "size" "1/2") }}
+    {{ partial "components/homebox" (dict "page" $tutorials "size" "1/2") }}
 
 
     {{ $howto := site.GetPage "howto" }}
-    {{ partial "components/homebox" (dict "page" $howto "color" "green-400" ) }}
+    {{ partial "components/homebox" (dict "page" $howto ) }}
 
    
     {{ $references := site.GetPage "reference" }}
-    {{ partial "components/homebox" (dict "page" $references "color" "yellow-400" "showchildren" false) }}
+    {{ partial "components/homebox" (dict "page" $references  "showchildren" false) }}
  
   
   </div>
