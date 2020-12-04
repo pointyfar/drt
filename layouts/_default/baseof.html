@@ -5,6 +5,11 @@
     <title>
       {{ .Title }}
     </title>
+    <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=3.0, user-scalable=yes">
+      <meta name="referrer" content="same-origin">
+      <meta http-equiv="content-language" content="{{site.LanguageCode}}">
+
     <meta name="description" content="{{ .Description }}">
     {{/* styles */}}
    {{ $options := dict "inlineImports" true }}
@@ -19,11 +24,11 @@
   <body class="bg-gray-200 tracking-wider tracking-normal">
     {{ partial "topnav.html" . }}
     <!--Container-->
-    <div class="container w-full flex flex-wrap mx-auto px-2 pt-8 lg:pt-16 mt-16 ">
-       <div class="w-full lg:w-1/5 lg:px-6 text-xl text-gray-800 leading-normal">
+    <div class="container w-full flex flex-wrap mx-auto px-2 pt-16 mt-16 ">
+       <div class="hidden md:flex w-full md:w-1/3 lg:w-1/5 mt-8 lg:px-6 text-xl text-gray-800 leading-normal">
           {{ partial "sidenav.html" . }}
        </div>
-       <div class="w-full lg:w-4/5 mt-6 lg:mt-0 text-gray-900 leading-normal ">
+       <div class="w-full md:w-2/3 lg:w-4/5 mt-0 text-gray-900 leading-normal ">
           {{ block "main" . }}{{ end }}
         
        </div>
