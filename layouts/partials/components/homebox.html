@@ -6,7 +6,7 @@
 {{ with $page.Params.theme }}{{ $color = . }}{{ end }}
 
 <div class="md:flex md:w-1/2 lg:w-{{$size}} p-2">
-    <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-{{$color}}">
+    <div class="md:flex-1 p-8 shadow-lg border-t-8 bg-white mb-4 border-{{$color}}-400">
         <h2 class="text-3xl font-semibold text-gray-800">
             <a class="hover:text-gray-600"
                 href="{{$page.Permalink}}">
