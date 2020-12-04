@@ -1,0 +1,82 @@
+<style>
+    .xfooter::before {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0.15;
+        background-position: 80% 50%;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-image:url({{"/hugo.png" | relURL}});
+    }
+    footer {
+        min-height:30rem; 
+    }
+</style>
+
+<footer class="border-t-8 bg-white border-gray-300 shadow"
+        
+>
+    <div class="container mx-auto flex py-8">
+       <div class="w-full mx-auto flex flex-wrap">
+          <div class="flex w-full lg:w-2/5">
+             <div class="px-8 text-center w-full">
+                <h2 class="text-xl  text-center font-bold uppercase text-gray-600">The Hugo Authors</h2>
+                <img class="h-auto " src="{{"/hugo-logo.png" | relURL }}">
+
+                <div class="py-4 text-gray-600 text-base">
+                    <ul class="py-4 text-gray-600">
+                        <li>
+                            File an Issue
+                        </li>
+                        <li>
+                            Get Help 
+                        </li>
+                        <li>
+                            Discuss
+                        </li>
+                        <li>
+                            Source Code
+                        </li>
+                    </ul>
+                </div>
+                <div class="py-4 text-gray-600 text-sm">
+                    @GoHugoIO @spf13 @bepsays
+                </div>
+                <div class="py-4 text-gray-600 text-sm">
+                <p>
+                    The Hugo logos are copyright © Steve Francia 2013–2020.
+                </p>
+                <p>
+                    The Hugo Gopher is based on an original work by Renée French.
+                </p>
+                </div>
+             </div>
+          </div>
+          <div class="flex w-full lg:w-2/5 lg:justify-end lg:text-right">
+             <div class="px-8 text-center w-full">
+                <h2 class="text-xl  text-center font-bold uppercase text-gray-600">Hugo Sponsors</h2>
+                <ul class="list-reset w-full mx-auto flex flex-wrap text-sm pt-3">
+                    {{ range seq 4 }}
+                   <li class="w-full lg:w-1/2 p0">
+                    <div class="m-2  border border-gray-200 rounded h-24">
+                    </div>
+                      
+                   </li>
+                   {{ end }}
+                </ul>
+             </div>
+          </div>
+          <div class="flex w-full lg:w-1/5 lg:justify-end lg:text-right">
+            <div class="h-auto w-full px-8 ">
+               <img class="h-auto " src="{{"/gopher-side_color.svg" | relURL }}">
+            </div>
+         </div>
+       </div>
+    </div>
+ </footer>
