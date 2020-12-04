@@ -5,13 +5,7 @@
 @import "components/all.css";
 
 html {
-    font-size: 14px;
-}
-
-@screen md {
-    html {
-        font-size: 16px;
-    }
+    font-size: 12px;
 }
 
 @layer components {
