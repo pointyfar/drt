@@ -48,7 +48,7 @@
     {{ else }}
         <li class="{{cond (eq $currentLevel $currentPage) "current" "" }}">
             <div>
-            <a href="{{$currentLevel.Permalink}}" >{{ $currentLevel.Title }}</a>
+                <a href="{{$currentLevel.Permalink}}" >{{ $currentLevel.Title }}</a>
             </div>
         </li>
     {{ end }}
@@ -57,19 +57,4 @@
     {{ end }}
 {{ end }}
 
-{{ define "partials/level-styler" }}
-
-{{ $res := "" }}
-
-{{ if eq . 1 }}{{ $res = "font-semibold text-base uppercase mb-4 mt- border border-blue-400 px-2" }}{{ end }}
-{{ if eq . 2 }}{{ $res = "font-semibold text-base normal-case mb-4 mt-8" }}{{ end }}
-{{ if eq . 3 }}{{ $res = "font-normal text-base " }}{{ end }}
-{{ if eq . 4 }}{{ $res = "font-normal text-sm " }}{{ end }}
-
-{{ return $res }}
-
-{{ end }}
-
-
-             
-          </div>
+</div>
